@@ -5,6 +5,23 @@ body{
 	text-align: justify;
 	pointer-events: none;
 }
+.weather p{
+	letter-spacing: 1px;
+  	margin: 0px;
+  	text-transform: uppercase;
+}
+
+.spinner{
+	width: 20px;
+	height: 20px;
+	border-radius: 25px;
+	border-left: 3px solid #333333;
+	border-right: 3px solid #333333;
+	-webkit-animation: spin 2s linear infinite;
+}
+@-webkit-keyframes spin {
+  100% {  transform: rotate(359deg); }
+ }
 
 p, span{
 	color: #333333;

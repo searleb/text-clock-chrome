@@ -6,102 +6,46 @@ function textClock () {
 		minutes = newDate.getMinutes().toString(),
 		seconds = newDate.getSeconds().toString();
 
+	if ( hours > 12 && hours != 0 && hours != 23 ){
+		hours = hours - 12
+	};
+	
 	if (minutes < 10) { minutes = 0 + minutes };
 	if (seconds < 10) { seconds = 0 + seconds };
-	if (day == 5){
-		$('#tgif').html('TGIF');
-	}	
+	
 	var minsSecs = minutes + seconds;
 	if (minsSecs > 3230){
 		hours ++;
 	};
-	// console.log('day', day, 'hours', hours, 'minutes', minutes, "sec", seconds);
-	// console.log('minsec',minsSecs);
 
-	switch (hours){
-		case (1):
-			updateHour('#one');
-			break;
-		case (2):
-			updateHour('#two');
-			break;
-		case (3):
-			updateHour('#three');
-			break;
-		case (4):
-			updateHour('#four');
-			break;
-		case (5):
-			updateHour('#five-hr');
-			break;
-		case (6):
-			updateHour('#six');
-			break;
-		case (7):
-			updateHour('#seven');
-			break;
-		case (8):
-			updateHour('#eight');
-			break;
-		case (9):
-			updateHour('#nine');
-			break;
-		case (10):
-			updateHour('#ten-hr');
-			break;
-		case (11):
-			updateHour('#eleven');
-			break;
-		case (12):
-			updateHour('#twelve');
-			break;
-		case (13):
-			updateHour('#one');
-			break;
-		case (14):
-			updateHour('#two');
-			break;
-		case (15):
-			updateHour('#three');
-			break;
-		case (16):
-			updateHour('#four');
-			break;
-		case (17):
-			updateHour('#five-hr');
-			break;
-		case (18):
-			updateHour('#six');
-			break;
-		case (19):
-			updateHour('#seven');
-			break;
-		case (20):
-			updateHour('#eight');
-			break;
-		case (21):
-			updateHour('#nine');
-			break;
-		case (22):
-			updateHour('#ten-hr');
-			break;
-		case (23):
-			updateHour('#eleven');
-			break;
-		case (24):
-			updateHour('#midnight');
-			break;
-		case (0):
-			updateHour('#midnight');
-			break;
-		default:
-			updateHour();
-			break;
-	}
+	if (day == 5){
+		$('#tgif').html('TGIF');
+	};
+
+	hoursObj = {	
+			1: '#one',
+			2: '#two',
+			3: '#three',
+			4: '#four',
+			5: '#five-hr',
+			6: '#six',
+			7: '#seven',
+			8: '#eight',
+			9: '#nine',
+			10: '#ten-hr',
+			11: '#eleven',
+			12: '#twelve',
+			23: '#eleven',
+			24: '#midnight',
+			0: '#midnight'
+	};
+
+	updateHour(hoursObj[hours]);
 	
 	if ( (minsSecs >= 5730 && minsSecs < 6000) || (minsSecs >= 0 && minsSecs < 230) ) {
-		if(!hours == 0)
-		updateDesc('#oclock');
+		if(hours != 24 && hours != 0){
+			updateDesc('#oclock');
+		}
 	} else if (minsSecs >= 230 && minsSecs < 730) {
 		updateDesc('#five, #past');
 	} else if (minsSecs >= 730 && minsSecs < 1230) {
@@ -145,5 +89,36 @@ setInterval(function(){
 },5000);
 
 textClock();
+
+
+
+
+// Weather
+
+if (navigator.geolocation){
+
+	  navigator.geolocation.getCurrentPosition(function(position) {
+	    loadWeather(position.coords.latitude+','+position.coords.longitude); //load weather using your lat/lng coordinates
+	  });
+
+	  function loadWeather(location, woeid) {
+	    $.simpleWeather({
+	      location: location,
+	      woeid: woeid,
+	      unit: 'c',
+	      success: function(weather) {
+	      	console.log(weather);
+	        html = '<p><i class="icon-'+weather.code+'"></i> '+weather.temp+'&deg;'+weather.units.temp+'</h2>';
+	        html += '<p>'+weather.city+', '+weather.region+'</>';
+	        html += '<p>'+weather.currently+'</p>';
+	        
+	        $(".weather").html(html);
+	      },
+	      error: function(error) {
+	        $("#weather").html('<p>'+error+'</p>');
+	      }
+	    });
+	}
+} 
 
 

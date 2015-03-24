@@ -2,8 +2,8 @@
   "manifest_version": 2,
 
   "name": "Text Clock",
-  "description": "Time in a readable format - English",
-  "version": "0.2",
+  "description": "Time in Text",
+  "version": "0.3",
   "offline_enabled": true,
   "chrome_url_overrides": {
     "newtab": "index.html"
