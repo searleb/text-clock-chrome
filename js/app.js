@@ -95,30 +95,30 @@ textClock();
 
 // Weather
 
-if (navigator.geolocation){
+// if (navigator.geolocation){
 
-	  navigator.geolocation.getCurrentPosition(function(position) {
-	    loadWeather(position.coords.latitude+','+position.coords.longitude); //load weather using your lat/lng coordinates
-	  });
+// 	  navigator.geolocation.getCurrentPosition(function(position) {
+// 	    loadWeather(position.coords.latitude+','+position.coords.longitude); //load weather using your lat/lng coordinates
+// 	  });
 
-	  function loadWeather(location, woeid) {
-	    $.simpleWeather({
-	      location: location,
-	      woeid: woeid,
-	      unit: 'c',
-	      success: function(weather) {
-	      	console.log(weather);
-	        html = '<p><i class="icon-'+weather.code+'"></i> '+weather.temp+'&deg;'+weather.units.temp+'</h2>';
-	        html += '<p>'+weather.city+', '+weather.region+'</>';
-	        html += '<p>'+weather.currently+'</p>';
+// 	  function loadWeather(location, woeid) {
+// 	    $.simpleWeather({
+// 	      location: location,
+// 	      woeid: woeid,
+// 	      unit: 'c',
+// 	      success: function(weather) {
+// 	      	console.log(weather);
+// 	        html = '<p><i class="icon-'+weather.code+'"></i> '+weather.temp+'&deg;'+weather.units.temp+'</h2>';
+// 	        html += '<p>'+weather.city+', '+weather.region+'</>';
+// 	        html += '<p>'+weather.currently+'</p>';
 	        
-	        $(".weather").html(html);
-	      },
-	      error: function(error) {
-	        $("#weather").html('<p>'+error+'</p>');
-	      }
-	    });
-	}
-} 
+// 	        $(".weather").html(html);
+// 	      },
+// 	      error: function(error) {
+// 	        $("#weather").html('<p>'+error+'</p>');
+// 	      }
+// 	    });
+// 	}
+// } 
 
 
